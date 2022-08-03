@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="create_tables" author="Andrei Dodu">
+	
+	
+		<createTable tableName="conf_questionnaire" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_questionnaire_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_questionnaire_id" />
+			</column>
+			<column name="questionnaire_code" type="VARCHAR(100)"/>
+			<column name="title" type="VARCHAR(500)"/>
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>
+		<addUniqueConstraint columnNames="questionnaire_code" constraintName="questionnaire_code_uq" 
+							 schemaName="${schemaName}" tableName="conf_questionnaire" /> 
+		
+		
+		<createTable tableName="conf_group" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_group_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_group_id" />
+			</column>
+			
+			<column name="group_code" type="VARCHAR(100)"/>
+			<column name="title" type="VARCHAR(500)"/>
+			
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>
+		<addUniqueConstraint columnNames="group_code" constraintName="group_code_uq" 
+							 schemaName="${schemaName}" tableName="conf_group" /> 
+		
+		
+		<createTable tableName="conf_questionnaire_group" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_questionnaire_group_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_grp_questionnaire" />
+			</column>
+			
+			<column name="conf_questionnaire_id" type="BIGINT"/>
+			<column name="conf_group_id" type="BIGINT"/>
+			<column name="order" type="INT"/>
+			
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>			
+		<addForeignKeyConstraint  
+			baseColumnNames="conf_questionnaire_id"  
+            baseTableName="conf_questionnaire_group"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_grp_que_que_id"  
+            referencedColumnNames="conf_questionnaire_id"  
+            referencedTableName="conf_questionnaire"  
+            referencedTableSchemaName="${schemaName}"/>  
+		<addForeignKeyConstraint  
+			baseColumnNames="conf_group_id"  
+            baseTableName="conf_questionnaire_group"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_grp_que_grp_id"  
+            referencedColumnNames="conf_group_id"  
+            referencedTableName="conf_group"  
+            referencedTableSchemaName="${schemaName}"/> 
+		
+		
+		<createTable tableName="conf_section" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_section_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_section_id" />
+			</column>
+			
+			<column name="section_code" type="VARCHAR(100)"/>
+			<column name="title" type="VARCHAR(500)"/>
+			
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>		
+		<addUniqueConstraint columnNames="section_code" constraintName="section_code_uq" 
+							 schemaName="${schemaName}" tableName="conf_section" /> 	
+		
+		
+		<createTable tableName="conf_group_section" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_group_section_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_grp_section_id" />
+			</column>
+			
+			<column name="conf_group_id" type="BIGINT"/>
+			<column name="conf_section_id" type="BIGINT"/>
+			<column name="order" type="INT"/>
+			
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>			
+		<addForeignKeyConstraint  
+			baseColumnNames="conf_group_id"  
+            baseTableName="conf_group_section"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_grp_sec_grp_cod"  
+            referencedColumnNames="conf_group_id"  
+            referencedTableName="conf_group"  
+            referencedTableSchemaName="${schemaName}"/>  
+		<addForeignKeyConstraint  
+			baseColumnNames="conf_section_id"  
+            baseTableName="conf_group_section"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_grp_sec_sec_cod"  
+            referencedColumnNames="conf_section_id"  
+            referencedTableName="conf_section"  
+            referencedTableSchemaName="${schemaName}"/> 
+		
+		
+		
+		
+		<createTable tableName="conf_question" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_question_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_question_id" />
+			</column>
+			
+			<column name="question_code" type="VARCHAR(10)"/>
+			<column name="hol_code" type="VARCHAR(10)"/>
+			<!-- TXT, STR, NUM, DATE -->
+			<column name="type" type="VARCHAR(4)"/>
+			<column name="common_code" type="VARCHAR(100)"/>
+			
+			<column name="valid_from" type="DATETIME"/>
+			<column name="valid_to" type="DATETIME"/>
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>		
+		<addUniqueConstraint columnNames="question_code" constraintName="question_code_uq" 
+							 schemaName="${schemaName}" tableName="conf_question" />  
+		<addUniqueConstraint columnNames="hol_code" constraintName="hol_code_uq" 
+							 schemaName="${schemaName}" tableName="conf_question" /> 							 
+		
+		
+		
+		<createTable tableName="conf_section_question" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_section_question_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_section_question_id" />
+			</column>
+			
+			<column name="conf_section_id" type="BIGINT"/>
+			<column name="conf_question_id" type="BIGINT"/>
+			<column name="order" type="INT"/>
+			
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>			
+		<addForeignKeyConstraint  
+			baseColumnNames="conf_question_id"  
+            baseTableName="conf_section_question"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_sec_que_que_cod"  
+            referencedColumnNames="conf_question_id"  
+            referencedTableName="conf_question"  
+            referencedTableSchemaName="${schemaName}"/>  
+		<addForeignKeyConstraint  
+			baseColumnNames="conf_section_id"  
+            baseTableName="conf_section_question"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_sec_que_sec_cod"  
+            referencedColumnNames="conf_section_id"  
+            referencedTableName="conf_section"  
+            referencedTableSchemaName="${schemaName}"/>  		
+		
+	
+		
+		
+		
+		<createTable tableName="conf_translation" schemaName="${schemaName}">
+			<column autoIncrement="${autoIncrement}" name="conf_translation_id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_translation_id" />
+			</column>
+			<column name="question_code" type="VARCHAR(10)"/>
+			<column name="hol_code" type="VARCHAR(10)"/>
+			<column name="common_code" type="VARCHAR(100)"/>
+			<column name="language" type="VARCHAR(3)"/>
+			<column name="text" type="TEXT"/>
+			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
+			<column name="version" type="INT" />
+		</createTable>	
+		<addForeignKeyConstraint  
+			baseColumnNames="question_code"  
+            baseTableName="conf_translation"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_tra_que_cod"  
+            referencedColumnNames="question_code"  
+            referencedTableName="conf_question"  
+            referencedTableSchemaName="${schemaName}"/>  
+		<addForeignKeyConstraint  
+			baseColumnNames="hol_code"  
+            baseTableName="conf_translation"  
+            baseTableSchemaName="${schemaName}"  
+            constraintName="fk_tra_que_hol_cod"  
+            referencedColumnNames="hol_code"  
+            referencedTableName="conf_question"  
+            referencedTableSchemaName="${schemaName}"/>              
+			
+	</changeSet>	
+	
+</databaseChangeLog>
