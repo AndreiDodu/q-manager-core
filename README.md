@@ -26,7 +26,7 @@ Each group, section or question has an order with respect to its parent. Therefo
 
 ## Running
 
-To start the applciation:
+To make the executable jar file:
 
 	mvn clean package
 	
