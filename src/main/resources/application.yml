@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:postgresql://localhost:5432/questionnaire-manager
     username: root
     password: password
   liquibase:
@@ -12,7 +12,4 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: false
-graphql:
-  servlet:
-    mapping: /graphql      
+        format_sql: false   
