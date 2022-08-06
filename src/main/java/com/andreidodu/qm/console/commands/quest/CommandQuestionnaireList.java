@@ -18,7 +18,7 @@ public class CommandQuestionnaireList implements Command {
 	private static final String COMMAND = "questionnaireList";
 
 	@Autowired
-	private QuestionnaireService questionnaireService;
+	private QuestionnaireService service;
 
 	@Override
 	public String getCommand() {
@@ -29,7 +29,7 @@ public class CommandQuestionnaireList implements Command {
 	public void execute(Map<Integer, String> commands) {
 		System.out.println("==> Questionnaire list all");
 		String languageCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG0_COMMAND));
-		List<QuestionnaireInsert> list = this.questionnaireService.getAll(languageCode);
+		List<QuestionnaireInsert> list = this.service.getAll(languageCode);
 		list.forEach(item -> {
 			System.out.println(item);
 		});

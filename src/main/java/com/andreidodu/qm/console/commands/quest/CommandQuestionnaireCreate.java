@@ -19,7 +19,7 @@ public class CommandQuestionnaireCreate implements Command {
 	private static final String COMMAND = "questionnaireCreate";
 
 	@Autowired
-	private QuestionnaireService questionnaireService;
+	private QuestionnaireService service;
 
 	@Override
 	public String getCommand() {
@@ -33,9 +33,9 @@ public class CommandQuestionnaireCreate implements Command {
 		String help = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG1_COMMAND));
 		String languageCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG2_COMMAND));
 
-		QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(QuestionnaireUtil.generateRandomString(10), title, help, languageCode);
-		Questionnaire questionnaire = this.questionnaireService.create(questionnaireInsert);
-		System.out.println("==> Questionnaire created: [" + questionnaire + "]");
+		QuestionnaireInsert insertDto = new QuestionnaireInsert(QuestionnaireUtil.generateRandomString(10), title, help, languageCode);
+		Questionnaire dto = this.service.create(insertDto);
+		System.out.println("==> Questionnaire created: [" + dto + "]");
 	}
 
 }

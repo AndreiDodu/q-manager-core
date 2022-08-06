@@ -17,7 +17,7 @@ public class CommandQuestionnaireUpdate implements Command {
 	private static final String COMMAND = "questionnaireUpdate";
 
 	@Autowired
-	private QuestionnaireService questionnaireService;
+	private QuestionnaireService service;
 
 	@Override
 	public String getCommand() {
@@ -27,13 +27,13 @@ public class CommandQuestionnaireUpdate implements Command {
 	@Override
 	public void execute(Map<Integer, String> commands) {
 		System.out.println("==> Questionnaire updating selected");
-		String questionnaireCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG0_COMMAND));
+		String code = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG0_COMMAND));
 		String title = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG1_COMMAND));
 		String help = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG2_COMMAND));
 		String languageCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG3_COMMAND));
-		QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(questionnaireCode, title, help, languageCode);
-		QuestionnaireInsert questionnaire = this.questionnaireService.update(questionnaireInsert);
-		System.out.println("==> Questionnaire updated: [" + questionnaire + "]");
+		QuestionnaireInsert insertDto = new QuestionnaireInsert(code, title, help, languageCode);
+		QuestionnaireInsert dto = this.service.update(insertDto);
+		System.out.println("==> Questionnaire updated: [" + dto + "]");
 	}
 
 }

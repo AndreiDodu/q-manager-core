@@ -16,7 +16,7 @@ public class CommandQuestionnaireDelete implements Command {
 	private static final String COMMAND = "questionnaireDelete";
 
 	@Autowired
-	private QuestionnaireService questionnaireService;
+	private QuestionnaireService service;
 
 	@Override
 	public String getCommand() {
@@ -26,8 +26,8 @@ public class CommandQuestionnaireDelete implements Command {
 	@Override
 	public void execute(Map<Integer, String> commands) {
 		System.out.println("==> Questionnaire deletion selected");
-		String questionnaireCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG0_COMMAND));
-		Boolean result = this.questionnaireService.delete(questionnaireCode);
+		String code = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG0_COMMAND));
+		Boolean result = this.service.delete(code);
 		System.out.println("==> Questionnaire deletion status: " + result);
 	}
 
