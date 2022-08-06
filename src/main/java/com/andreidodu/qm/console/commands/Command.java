@@ -2,7 +2,7 @@ package com.andreidodu.qm.console.commands;
 
 import java.util.Map;
 
-public interface CommandQuestionnaire {
+public interface Command {
 
 	String getCommand();
 	

@@ -1,24 +1,25 @@
-package com.andreidodu.qm.console.commands;
+package com.andreidodu.qm.console.commands.group;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.andreidodu.qm.console.commands.Command;
 import com.andreidodu.qm.console.constants.ConsoleConstants;
 import com.andreidodu.qm.console.util.ConsoleUtil;
 import com.andreidodu.qm.console.util.QuestionnaireUtil;
-import com.andreidodu.qm.dto.Questionnaire;
-import com.andreidodu.qm.dto.input.QuestionnaireInsert;
-import com.andreidodu.qm.service.QuestionnaireService;
+import com.andreidodu.qm.dto.Group;
+import com.andreidodu.qm.dto.input.GroupInsert;
+import com.andreidodu.qm.service.GroupService;
 
 @Component
-public class CommandQuestionnaireCreate implements CommandQuestionnaire {
+public class CommandGroupCreate implements Command{
 
-	private static final String COMMAND = "create";
+	private static final String COMMAND = "groupCreate";
 
 	@Autowired
-	private QuestionnaireService questionnaireService;
+	private GroupService service;
 
 	@Override
 	public String getCommand() {
@@ -32,9 +33,9 @@ public class CommandQuestionnaireCreate implements CommandQuestionnaire {
 		String help = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG1_COMMAND));
 		String languageCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG2_COMMAND));
 
-		QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(QuestionnaireUtil.generateRandomString(10), title, help, languageCode);
-		Questionnaire questionnaire = this.questionnaireService.create(questionnaireInsert);
-		System.out.println("==> Questionnaire created: [" + questionnaire + "]");
+		GroupInsert groupInsert = new GroupInsert(QuestionnaireUtil.generateRandomString(10), title, help, languageCode);
+		Group group = this.service.create(groupInsert);
+		System.out.println("==> Group created: [" + group + "]");
 	}
 
 }

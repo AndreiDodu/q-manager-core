@@ -1,4 +1,4 @@
-package com.andreidodu.qm.console.commands;
+package com.andreidodu.qm.console.commands.group;
 
 import java.util.List;
 import java.util.Map;
@@ -6,18 +6,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.andreidodu.qm.console.commands.Command;
 import com.andreidodu.qm.console.constants.ConsoleConstants;
 import com.andreidodu.qm.console.util.ConsoleUtil;
-import com.andreidodu.qm.dto.input.QuestionnaireInsert;
-import com.andreidodu.qm.service.QuestionnaireService;
+import com.andreidodu.qm.dto.input.GroupInsert;
+import com.andreidodu.qm.service.GroupService;
 
 @Component
-public class CommandQuestionnaireList implements CommandQuestionnaire {
+public class CommandGroupList implements Command {
 
-	private static final String COMMAND = "list";
+	private static final String COMMAND = "groupList";
 
 	@Autowired
-	private QuestionnaireService questionnaireService;
+	private GroupService service;
 
 	@Override
 	public String getCommand() {
@@ -26,9 +27,9 @@ public class CommandQuestionnaireList implements CommandQuestionnaire {
 
 	@Override
 	public void execute(Map<Integer, String> commands) {
-		System.out.println("==> Questionnaire list all");
+		System.out.println("==> Group list all");
 		String languageCode = ConsoleUtil.processArgument(commands.get(ConsoleConstants.ARG0_COMMAND));
-		List<QuestionnaireInsert> list = this.questionnaireService.getAll(languageCode);
+		List<GroupInsert> list = this.service.getAll(languageCode);
 		list.forEach(item -> {
 			System.out.println(item);
 		});
