@@ -9,12 +9,12 @@ import java.util.Map;
 public class ConsoleUtil {
 
 	public static Map<Integer, String> scanCommandLine() throws IOException {
-		//Console c = System.console();
-		//String line = c.readLine();
-		
+		// Console c = System.console();
+		// String line = c.readLine();
+
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		String line = bufferedReader.readLine();
-		
+
 		Map<Integer, String> commands = new HashMap<>();
 		int i = 0;
 		String[] splitted = line.split("\"?( |$)(?=(([^\"]*\"){2})*[^\"]*$)\"?");
@@ -22,6 +22,17 @@ public class ConsoleUtil {
 			commands.put(i++, splitted[i - 1]);
 		}
 		return commands;
+	}
+
+	public static boolean isEmpty(String string) {
+		return string == null || "null".equalsIgnoreCase(string) || "$".equalsIgnoreCase(string) || string.trim().length() == 0;
+	}
+
+	public static String processArgument(String arg) {
+		if (isEmpty(arg)) {
+			return null;
+		}
+		return arg;
 	}
 
 }
