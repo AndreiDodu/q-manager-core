@@ -10,7 +10,7 @@
 	<groupId>com.andreidodu</groupId>
 	<artifactId>q-manager-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Questionnaire manager core</name>
+	<name>Q-Manager core</name>
 	<description>a questionaire manager</description>
 	<packaging>jar</packaging>
 	<properties>
