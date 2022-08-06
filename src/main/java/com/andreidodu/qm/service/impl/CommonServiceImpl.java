@@ -21,7 +21,7 @@ import com.andreidodu.qm.service.CommonService;
 import com.andreidodu.qm.service.TranslationService;
 
 @Transactional(propagation = Propagation.REQUIRED)
-public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInsertType extends InputCommon, DAOType, MapperType extends CommonMapper<DBType, DTOType, DTOInsertType>>
+public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInsertType extends InputCommon, MapperType extends CommonMapper<DBType, DTOType, DTOInsertType>>
 		implements CommonService<DTOInsertType, DTOType> {
 
 	private static final String HELP_QUESTION_CODE = "HELP";
@@ -29,7 +29,7 @@ public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInser
 
 	private final Class<DTOType> dtoClazz;
 	private final Class<DTOInsertType> dtoInsertClazz;
-	
+
 	@Autowired
 	private DaoFactory daoFactory;
 
@@ -43,7 +43,7 @@ public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInser
 		return this.daoFactory.getDao(this.dtoClazz.getSimpleName());
 	}
 
-	public CommonServiceImpl(Class<DTOType> dtoClazz,Class<DTOInsertType> dtoInsertClazz) {
+	public CommonServiceImpl(Class<DTOType> dtoClazz, Class<DTOInsertType> dtoInsertClazz) {
 		this.dtoClazz = dtoClazz;
 		this.dtoInsertClazz = dtoInsertClazz;
 	}
@@ -115,7 +115,8 @@ public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInser
 			Translation help = this.translationService.findByCommonCodeSubCodeLanguageCode(item.getCode(), HELP_QUESTION_CODE, languageCode);
 
 			try {
-				DTOInsertType ins = dtoInsertClazz.getConstructor(String.class, String.class, String.class, String.class).newInstance(item.getCode(), title == null ? null : title.text(), help == null ? null : help.text(), languageCode);
+				DTOInsertType ins = dtoInsertClazz.getConstructor(String.class, String.class, String.class, String.class).newInstance(item.getCode(), title == null ? null : title.text(),
+						help == null ? null : help.text(), languageCode);
 				result.add(ins);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();

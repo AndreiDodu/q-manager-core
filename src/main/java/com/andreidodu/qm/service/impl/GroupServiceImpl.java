@@ -8,12 +8,11 @@ import com.andreidodu.qm.db.GroupDB;
 import com.andreidodu.qm.dto.Group;
 import com.andreidodu.qm.dto.input.GroupInsert;
 import com.andreidodu.qm.mapper.GroupMapper;
-import com.andreidodu.qm.repository.GroupDao;
 import com.andreidodu.qm.service.GroupService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class GroupServiceImpl extends CommonServiceImpl<GroupDB, Long, Group, GroupInsert, GroupDao, GroupMapper> implements GroupService {
+public class GroupServiceImpl extends CommonServiceImpl<GroupDB, Long, Group, GroupInsert, GroupMapper> implements GroupService {
 
 	public GroupServiceImpl() {
 		super(Group.class, GroupInsert.class);
