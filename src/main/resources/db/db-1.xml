@@ -142,7 +142,7 @@
 			</column>
 			<column name="common_code" type="VARCHAR(10)"/>
 			<column name="identification_code" type="VARCHAR(10)"/>
-			<column name="language" type="VARCHAR(3)"/>
+			<column name="language_code" type="VARCHAR(3)"/>
 			<column name="text" type="TEXT"/>
 
 			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
