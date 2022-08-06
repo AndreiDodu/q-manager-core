@@ -1,5 +1,6 @@
 package com.andreidodu.qm.console;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -24,7 +25,6 @@ public class CommandProcessor {
 	private static final int ARG2_COMMAND = 4;
 	private static final int ARG3_COMMAND = 5;
 
-
 	public void process(Map<Integer, String> commands) {
 
 		if (ConsoleConstants.EXIT_COMMAND.equalsIgnoreCase(commands.get(MAIN_COMMAND))) {
@@ -43,31 +43,37 @@ public class CommandProcessor {
 			String help = this.isEmpty(commands.get(ARG1_COMMAND)) ? null : commands.get(ARG1_COMMAND);
 			String languageCode = this.isEmpty(commands.get(ARG2_COMMAND)) ? null : commands.get(ARG2_COMMAND);
 
-			QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(this.generateRandomString(10), title,
-					help, languageCode);
+			QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(this.generateRandomString(10), title, help, languageCode);
 			Questionnaire questionnaire = this.questionnaireService.create(questionnaireInsert);
 			System.out.println("==> Questionnaire created: [" + questionnaire + "]");
-		} 
-		if ("update".equalsIgnoreCase(commands.get(ACTION_COMMAND))) {
+		} else if ("update".equalsIgnoreCase(commands.get(ACTION_COMMAND))) {
 			System.out.println("==> Questionnaire updating selected");
 			String questionnaireCode = this.isEmpty(commands.get(ARG0_COMMAND)) ? null : commands.get(ARG0_COMMAND);
 			String title = this.isEmpty(commands.get(ARG1_COMMAND)) ? null : commands.get(ARG1_COMMAND);
 			String help = this.isEmpty(commands.get(ARG2_COMMAND)) ? null : commands.get(ARG2_COMMAND);
 			String languageCode = this.isEmpty(commands.get(ARG3_COMMAND)) ? null : commands.get(ARG3_COMMAND);
-			QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(questionnaireCode, title,
-					help, languageCode);
+			QuestionnaireInsert questionnaireInsert = new QuestionnaireInsert(questionnaireCode, title, help, languageCode);
 			QuestionnaireInsert questionnaire = this.questionnaireService.update(questionnaireInsert);
 			System.out.println("==> Questionnaire updated: [" + questionnaire + "]");
-		}
-		
-		else {
+		} else if ("list".equalsIgnoreCase(commands.get(ACTION_COMMAND))) {
+			System.out.println("==> Questionnaire list all");
+			String languageCode = this.isEmpty(commands.get(ARG0_COMMAND)) ? null : commands.get(ARG0_COMMAND);
+			List<QuestionnaireInsert> list = this.questionnaireService.getAll(languageCode);
+			list.forEach(item -> {
+				System.out.println(item);
+			});
+		} else if ("delete".equalsIgnoreCase(commands.get(ACTION_COMMAND))) {
+			System.out.println("==> Questionnaire deletion selected");
+			String questionnaireCode = this.isEmpty(commands.get(ARG0_COMMAND)) ? null : commands.get(ARG0_COMMAND);
+			Boolean result = this.questionnaireService.delete(questionnaireCode);
+			System.out.println("==> Questionnaire deletion status: " + result);
+		} else {
 			System.out.println("Uknown command");
 		}
 	}
 
 	private boolean isEmpty(String string) {
-		return string == null || "null".equalsIgnoreCase(string) || "$".equalsIgnoreCase(string)
-				|| string.trim().length() == 0;
+		return string == null || "null".equalsIgnoreCase(string) || "$".equalsIgnoreCase(string) || string.trim().length() == 0;
 
 	}
 
@@ -75,9 +81,7 @@ public class CommandProcessor {
 		int leftLimit = 48; // numeral '0'
 		int rightLimit = 96; // letter 'z'
 		Random random = new Random();
-		return random.ints(leftLimit, rightLimit + 1).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-				.limit(length).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-				.toString();
+		return random.ints(leftLimit, rightLimit + 1).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(length).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
 	}
 
 }

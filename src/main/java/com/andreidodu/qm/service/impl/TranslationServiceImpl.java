@@ -40,4 +40,15 @@ public class TranslationServiceImpl implements TranslationService {
 		return null;
 	}
 
+	@Override
+	public Translation findByCommonCodeSubCodeLanguageCode(String commonCode, String subCode, String languageCode) {
+		TranslationDB db = this.dao.findByCommonCodeAndSubCodeAndLanguageCode(commonCode, subCode, languageCode);
+		return this.mapper.toDTO(db);
+	}
+
+	@Override
+	public void deleteByCommonCodeAndSubCode(String commonCode, String subCode) {
+		this.dao.deleteByCommonCodeAndSubCode(commonCode, subCode);
+	}
+
 }

@@ -8,6 +8,8 @@ import com.andreidodu.qm.db.TranslationDB;
 @Repository
 public interface TranslationDao extends CrudRepository<TranslationDB, Long> {
 
-	TranslationDB findByCommonCodeAndSubCodeAndLanguageCode(String commonCode, String subCode, String language);
+	TranslationDB findByCommonCodeAndSubCodeAndLanguageCode(String commonCode, String subCode, String languageCode);
+
+	void deleteByCommonCodeAndSubCode(String commonCode, String subCode);
 
 }

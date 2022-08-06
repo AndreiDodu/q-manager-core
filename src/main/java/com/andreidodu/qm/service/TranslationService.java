@@ -9,4 +9,8 @@ public interface TranslationService {
 
 	Translation update(TranslationInsert translation);
 
+	Translation findByCommonCodeSubCodeLanguageCode(String commonCode, String subCode, String languageCode);
+
+	void deleteByCommonCodeAndSubCode(String questionnaireCode, String titleCode);
+
 }
