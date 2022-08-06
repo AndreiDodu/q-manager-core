@@ -127,6 +127,24 @@ public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, 
 	}
 
 	@Override
+	public DTOInsertType getByCode(String code, String languageCode) {
+		DBType db = getDao().findByCode(code);
+		if (db != null) {
+			Translation title = this.translationService.findByCommonCodeSubCodeLanguageCode(db.getCode(), TITLE_QUESTION_CODE, languageCode);
+			Translation help = this.translationService.findByCommonCodeSubCodeLanguageCode(db.getCode(), HELP_QUESTION_CODE, languageCode);
+
+			try {
+				DTOInsertType ins = dtoInsertClazz.getConstructor(String.class, String.class, String.class, String.class).newInstance(db.getCode(), title == null ? null : title.text(), help == null ? null : help.text(),
+						languageCode);
+				return ins;
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public Boolean delete(String code) {
 
 		DBType db = getDao().findByCode(code);

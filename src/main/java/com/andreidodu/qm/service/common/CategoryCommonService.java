@@ -12,4 +12,6 @@ public interface CategoryCommonService<DTOInsertType, DTOType> {
 
 	public Boolean delete(String code);
 
+	DTOInsertType getByCode(String code, String languageCode);
+
 }
