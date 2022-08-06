@@ -61,6 +61,4 @@ To delete a questionnaire
 Where:
  - `QUESTIONNAIRE_CODE` is the questionnaire code found on DB	
  
-  <a href="https://gitea.io/">
-    <img alt="Gitea" src="https://raw.githubusercontent.com/go-gitea/gitea/main/public/img/gitea.svg" width="220"/>
-  </a>
+<img alt="Q-Manager Schema" src="http://192.168.1.101:3000/gitea/questionnaire-manager-core/raw/branch/master/questionnaire-manager-schema.png" />
