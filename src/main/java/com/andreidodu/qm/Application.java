@@ -1,4 +1,4 @@
-package com.andreidodu.boilerplate;
+package com.andreidodu.qm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

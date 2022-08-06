@@ -1,4 +1,4 @@
-package com.andreidodu.boilerplate.db;
+package com.andreidodu.qm.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,21 +15,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "conf_questionnaire_group")
-public class QuestionnaireGroupDB extends CommonDB {
+@Table(name = "conf_group_section")
+public class GroupSectionDB extends CommonDB {
 
 	@Id
-	@Column(name = "conf_questionnaire_group_id", nullable = false)
+	@Column(name = "conf_group_section_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "conf_questionnaire_id")
-	private QuestionnaireDB questionnaire;
-
-	@ManyToOne
 	@JoinColumn(name = "conf_group_id")
 	private GroupDB group;
+
+	@ManyToOne
+	@JoinColumn(name = "conf_section_id")
+	private SectionDB section;
 
 	@Column(name = "order")
 	private Integer order;

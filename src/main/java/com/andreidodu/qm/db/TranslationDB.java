@@ -1,4 +1,4 @@
-package com.andreidodu.boilerplate.db;
+package com.andreidodu.qm.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
