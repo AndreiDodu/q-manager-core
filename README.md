@@ -1,5 +1,5 @@
 # Q-Manager
-A questionnaire manager.
+A questionnaire manager library.
 
 ## Structure 
 
@@ -24,6 +24,14 @@ At the graphic level, a questionnaire is a set of tabs. A group is represented b
 
 Each group, section or question has an order with respect to its parent. Therefore the groups can be ordered on the basis of the order property of the relationship table between the questionnaire and the group. The same logic applies to the section and to the questions.
 
+## Technologies
+- Spring boot
+- Hibernate
+- Liquibase
+- Mapstruct
+- Docker
+- (JDK 17)
+
 ## Command line
 Q-Manager can be used from the command line. The commands are the followings:
 
@@ -33,6 +41,10 @@ To make the executable jar file:
 
 	mvn clean package
 	
+To run the DBMS:
+	
+	sudo docker-compose up
+
 To run the application:
 	
 	java -jar q-manager.jar
