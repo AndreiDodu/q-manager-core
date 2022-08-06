@@ -1,15 +1,4 @@
 package com.andreidodu.qm.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class Questionnaire extends Common {
-
-	private Long id;
-	private String questionnaireCode;
-	private String titleCode;
-	private String helpCode;
-
+public record Questionnaire(Long id, String questionnaireCode, String titleCode, String helpCode) {
 }

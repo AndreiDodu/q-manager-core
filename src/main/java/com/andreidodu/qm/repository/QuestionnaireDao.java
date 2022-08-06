@@ -8,4 +8,6 @@ import com.andreidodu.qm.db.QuestionnaireDB;
 @Repository
 public interface QuestionnaireDao extends CrudRepository<QuestionnaireDB, Long> {
 
+	QuestionnaireDB findByQuestionnaireCode(String questionnaireCode);
+
 }

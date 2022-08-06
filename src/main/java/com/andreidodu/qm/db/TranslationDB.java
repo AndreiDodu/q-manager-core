@@ -30,7 +30,7 @@ public class TranslationDB extends CommonDB {
 	private String subCode;
 
 	@Column(name = "language_code", nullable = false)
-	private String language;
+	private String languageCode;
 
 	@Column(name = "text")
 	private String text;
