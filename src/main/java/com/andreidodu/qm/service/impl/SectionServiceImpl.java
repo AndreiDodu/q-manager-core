@@ -9,10 +9,11 @@ import com.andreidodu.qm.dto.Section;
 import com.andreidodu.qm.dto.input.SectionInsert;
 import com.andreidodu.qm.mapper.SectionMapper;
 import com.andreidodu.qm.service.SectionService;
+import com.andreidodu.qm.service.impl.common.CategoryCommonServiceImpl;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class SectionServiceImpl extends CommonServiceImpl<SectionDB, Long, Section, SectionInsert, SectionMapper> implements SectionService {
+public class SectionServiceImpl extends CategoryCommonServiceImpl<SectionDB, Long, Section, SectionInsert, SectionMapper> implements SectionService {
 
 	public SectionServiceImpl() {
 		super(Section.class, SectionInsert.class);

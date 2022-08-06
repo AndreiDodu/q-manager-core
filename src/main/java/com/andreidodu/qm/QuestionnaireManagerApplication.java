@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.andreidodu.qm.console.CommandProcessor;
-import com.andreidodu.qm.console.util.ConsoleUtil;
 
 @SpringBootApplication
 public class QuestionnaireManagerApplication implements CommandLineRunner {
@@ -20,9 +19,7 @@ public class QuestionnaireManagerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		while (true) {
-			this.commandProcessor.process(ConsoleUtil.scanCommandLine());
-		}
+		this.commandProcessor.run();
 	}
 
 }

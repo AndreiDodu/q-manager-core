@@ -1,4 +1,4 @@
-package com.andreidodu.qm.service.impl;
+package com.andreidodu.qm.service.impl.common;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.andreidodu.qm.db.CodesDB;
 import com.andreidodu.qm.dto.Translation;
-import com.andreidodu.qm.dto.input.InputCommon;
 import com.andreidodu.qm.dto.input.TranslationInsert;
+import com.andreidodu.qm.dto.input.common.CategoryInputCommon;
 import com.andreidodu.qm.mapper.common.CommonMapper;
-import com.andreidodu.qm.repository.CommonDao;
 import com.andreidodu.qm.repository.DaoFactory;
-import com.andreidodu.qm.service.CommonService;
+import com.andreidodu.qm.repository.common.CategoryCommonDao;
 import com.andreidodu.qm.service.TranslationService;
+import com.andreidodu.qm.service.common.CategoryCommonService;
 
 @Transactional(propagation = Propagation.REQUIRED)
-public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInsertType extends InputCommon, MapperType extends CommonMapper<DBType, DTOType, DTOInsertType>>
-		implements CommonService<DTOInsertType, DTOType> {
+public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInsertType extends CategoryInputCommon, MapperType extends CommonMapper<DBType, DTOType, DTOInsertType>>
+		implements CategoryCommonService<DTOInsertType, DTOType> {
 
 	private static final String HELP_QUESTION_CODE = "HELP";
 	private static final String TITLE_QUESTION_CODE = "TITLE";
@@ -39,11 +39,11 @@ public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInser
 	@Autowired
 	private MapperType mapper;
 
-	private CommonDao<DBType, IDType> getDao() {
+	private CategoryCommonDao<DBType, IDType> getDao() {
 		return this.daoFactory.getDao(this.dtoClazz.getSimpleName());
 	}
 
-	public CommonServiceImpl(Class<DTOType> dtoClazz, Class<DTOInsertType> dtoInsertClazz) {
+	public CategoryCommonServiceImpl(Class<DTOType> dtoClazz, Class<DTOInsertType> dtoInsertClazz) {
 		this.dtoClazz = dtoClazz;
 		this.dtoInsertClazz = dtoInsertClazz;
 	}
@@ -75,7 +75,7 @@ public class CommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInser
 
 	@Override
 	public DTOInsertType update(DTOInsertType questionnaireToUpdate) {
-		CommonDao<DBType, IDType> commonDao = getDao();
+		CategoryCommonDao<DBType, IDType> commonDao = getDao();
 		DBType db = commonDao.findByCode(questionnaireToUpdate.code());
 		if (db != null) {
 			if (questionnaireToUpdate.title() != null) {

@@ -1,5 +1,6 @@
 package com.andreidodu.qm.console;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.andreidodu.qm.console.commands.Command;
 import com.andreidodu.qm.console.constants.ConsoleConstants;
+import com.andreidodu.qm.console.util.ConsoleUtil;
 
 @Component
 public class CommandProcessor {
@@ -15,8 +17,13 @@ public class CommandProcessor {
 	@Autowired
 	List<Command> commands;
 
-	public void process(Map<Integer, String> commands) {
+	public void run() throws IOException {
+		while (true) {
+			this.process(ConsoleUtil.scanCommandLine());
+		}
+	}
 
+	private void process(Map<Integer, String> commands) {
 		if (ConsoleConstants.EXIT_COMMAND.equalsIgnoreCase(commands.get(ConsoleConstants.MAIN_COMMAND))) {
 			System.exit(0);
 		}

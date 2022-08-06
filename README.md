@@ -1,2 +1,2 @@
-# questionnaire-manager-core
+# Q-Manager
 A questionnaire manager

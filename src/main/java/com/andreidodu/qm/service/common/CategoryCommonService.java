@@ -1,11 +1,8 @@
-package com.andreidodu.qm.service;
+package com.andreidodu.qm.service.common;
 
 import java.util.List;
 
-import com.andreidodu.qm.IgnoreDuringScan;
-
-@IgnoreDuringScan
-public interface CommonService<DTOInsertType, DTOType> {
+public interface CategoryCommonService<DTOInsertType, DTOType> {
 
 	public DTOType create(DTOInsertType insertDto);
 

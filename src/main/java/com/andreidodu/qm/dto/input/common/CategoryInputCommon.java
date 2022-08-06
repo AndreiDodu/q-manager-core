@@ -1,6 +1,6 @@
-package com.andreidodu.qm.dto.input;
+package com.andreidodu.qm.dto.input.common;
 
-public interface InputCommon {
+public interface CategoryInputCommon {
 
 	public String code();
 

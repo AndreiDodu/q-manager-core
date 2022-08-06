@@ -9,9 +9,6 @@ import java.util.Map;
 public class ConsoleUtil {
 
 	public static Map<Integer, String> scanCommandLine() throws IOException {
-		// Console c = System.console();
-		// String line = c.readLine();
-
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		String line = bufferedReader.readLine();
 
