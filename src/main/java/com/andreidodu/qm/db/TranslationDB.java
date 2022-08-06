@@ -24,11 +24,8 @@ public class TranslationDB extends CommonDB {
 	@Column(name = "common_code")
 	private String commonCode;
 
-	@Column(name = "question_code")
-	private String questionCode;
-
-	@Column(name = "hol_code")
-	private String holCode;
+	@Column(name = "sub_code")
+	private String subCode;
 
 	@Column(name = "language", nullable = false)
 	private String language;

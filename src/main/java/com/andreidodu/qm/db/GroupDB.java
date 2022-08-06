@@ -25,10 +25,10 @@ public class GroupDB extends CommonDB {
 	private Long id;
 
 	@Column(name = "group_code", nullable = false, unique = true)
-	private String group_code;
+	private String groupCode;
 
-	@Column(name = "title")
-	private String title;
+	@Column(name = "title_code")
+	private String titleCode;
 
 	@OneToMany(mappedBy = "group")
 	Set<QuestionnaireGroupDB> questionnaireGroups;

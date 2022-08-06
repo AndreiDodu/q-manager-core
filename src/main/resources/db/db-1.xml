@@ -12,7 +12,7 @@
 				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_questionnaire_id" />
 			</column>
 			<column name="questionnaire_code" type="VARCHAR(100)"/>
-			<column name="title" type="VARCHAR(500)"/>
+			<column name="title_code" type="VARCHAR(100)"/>
 			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
 			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
 			<column name="version" type="INT" />
