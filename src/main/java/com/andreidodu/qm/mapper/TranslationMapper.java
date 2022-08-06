@@ -9,9 +9,6 @@ import com.andreidodu.qm.dto.input.TranslationInsert;
 import com.andreidodu.qm.mapper.common.CommonMapper;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface TranslationMapper
-		extends CommonMapper<TranslationDB, Translation, TranslationInsert, TranslationInsert> {
-
-
+public interface TranslationMapper extends CommonMapper<TranslationDB, Translation, TranslationInsert> {
 
 }

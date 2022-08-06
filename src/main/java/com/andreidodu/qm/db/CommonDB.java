@@ -3,6 +3,7 @@ package com.andreidodu.qm.db;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@MappedSuperclass
 public class CommonDB {
 
 	@Column(name = "insert_date", updatable = false, insertable = false)

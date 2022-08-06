@@ -2,6 +2,8 @@ package com.andreidodu.qm.db;
 
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,21 +19,14 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "conf_questionnaire")
-public class QuestionnaireDB extends CommonDB {
+@AttributeOverrides({ @AttributeOverride(name = "code", column = @Column(name = "questionnaire_code")) })
+public class QuestionnaireDB extends CodesDB {
 
 	@Id
 	@Column(name = "conf_questionnaire_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "questionnaire_code", nullable = false, unique = true)
-	private String questionnaireCode;
-
-	@Column(name = "title_code")
-	private String titleCode;
-
-	@Column(name = "help_code")
-	private String helpCode;
 
 	@OneToMany(mappedBy = "questionnaire")
 	Set<QuestionnaireGroupDB> questionnaireGroups;

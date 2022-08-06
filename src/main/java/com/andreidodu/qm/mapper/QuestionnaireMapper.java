@@ -9,7 +9,6 @@ import com.andreidodu.qm.dto.input.QuestionnaireInsert;
 import com.andreidodu.qm.mapper.common.CommonMapper;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface QuestionnaireMapper
-		extends CommonMapper<QuestionnaireDB, Questionnaire, QuestionnaireInsert, QuestionnaireInsert> {
+public interface QuestionnaireMapper extends CommonMapper<QuestionnaireDB, Questionnaire, QuestionnaireInsert> {
 
 }
