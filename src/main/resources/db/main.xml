@@ -8,5 +8,5 @@
 	<property name="autoIncrement" value="true" dbms="h2,oracle,postgresql" />
 	<property name="defaultTimeStamp" value="NOW()" dbms="postgresql"/>
 
-	<include file="db-1.xml" relativeToChangelogFile="true"/>
+	<include file="ddl.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
