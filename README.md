@@ -40,11 +40,11 @@ To create a Questionnaire:
 	questionnaire create TITLE HELP LANGUAGE_CODE
 
 Where:
- - TITLE is the title of your questionnaire
- - HELP is the text that describes the questionnaire
- - LANGUAGE_CODE the language code of the TITLE and HELP
+ - `TITLE` is the title of your questionnaire
+ - `HELP` is the text that describes the questionnaire
+ - `LANGUAGE_CODE` the language code of the `TITLE` and `HELP`
 
-If you do not want to specify the TITLE, use the $ symbol to indicate that you don't want to define that field.
+If you do not want to specify the `TITLE`, use the `$` symbol to indicate that you don't want to define that field.
 
 To update a Questionnaire:
 
@@ -59,4 +59,4 @@ To delete a questionnaire
 	questionnaire delete QUESTIONNAIRE_CODE	
 	
 Where:
- - QUESTIONNAIRE_CODE is the questionnaire code found on DB	
+ - `QUESTIONNAIRE_CODE` is the questionnaire code found on DB	
