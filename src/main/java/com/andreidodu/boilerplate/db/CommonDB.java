@@ -7,11 +7,13 @@ import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class CommonDB {
-	
+
 	@Column(name = "insert_date", updatable = false, insertable = false)
 	@JsonIgnore
 	private Timestamp dateIns;
