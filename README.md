@@ -60,5 +60,7 @@ To delete a questionnaire
 	
 Where:
  - `QUESTIONNAIRE_CODE` is the questionnaire code found on DB	
- 
+
+## Here is the DB schema:
+
 <img alt="Q-Manager Schema" src="http://192.168.1.101:3000/gitea/questionnaire-manager-core/raw/branch/master/questionnaire-manager-schema.png" />
