@@ -1,5 +1,6 @@
 package com.andreidodu.qm.db;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "conf_questionnaire_group")
+@Table(name = "conf_questionnaire_group", uniqueConstraints = @UniqueConstraint(columnNames = { "conf_questionnaire_id",
+		"conf_group_id" }))
 public class QuestionnaireGroupDB extends CommonDB {
 
 	@Id

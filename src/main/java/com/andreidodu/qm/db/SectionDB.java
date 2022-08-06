@@ -33,4 +33,7 @@ public class SectionDB extends CommonDB {
 	@OneToMany(mappedBy = "section")
 	Set<GroupSectionDB> groupSections;
 
+	@OneToMany(mappedBy = "section")
+	Set<SectionQuestionDB> sectionQuestions;
+
 }

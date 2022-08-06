@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "conf_group_section")
+@Table(name = "conf_group_section", uniqueConstraints = @UniqueConstraint(columnNames = { "conf_group_id",
+		"conf_section_id" }))
 public class GroupSectionDB extends CommonDB {
 
 	@Id
