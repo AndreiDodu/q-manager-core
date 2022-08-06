@@ -1,7 +1,7 @@
 # Q-Manager
 A questionnaire manager java library.
 
-An example of use of this library can be found in [q-manager-console](http://www.github.com).
+An example of use of this library can be found in [q-manager-console](https://github.com/AndreiDodu/q-manager-console).
 
 ## Structure 
 
