@@ -28,15 +28,15 @@ public class QuestionDB extends CommonDB {
 	@Column(name = "question_code", nullable = false, unique = true)
 	private String code;
 
-	@Column(name = "hol_code")
-	private String holCode;
+	@Column(name = "help_code")
+	private String helpCode;
+
+	@Column(name = "common_code")
+	private String commonCode;
 
 	@Pattern(regexp = "NUM|TEXT|STR|DATE|MUL", flags = Pattern.Flag.CASE_INSENSITIVE)
 	@Column(name = "type")
 	private String type;
-
-	@Column(name = "common_code")
-	private String commonCode;
 
 	@OneToMany(mappedBy = "question")
 	Set<SectionQuestionDB> sectionQuestions;

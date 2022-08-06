@@ -29,6 +29,9 @@ public class GroupDB extends CommonDB {
 
 	@Column(name = "title_code")
 	private String titleCode;
+	
+	@Column(name = "help_code")
+	private String holCode;
 
 	@OneToMany(mappedBy = "group")
 	Set<QuestionnaireGroupDB> questionnaireGroups;

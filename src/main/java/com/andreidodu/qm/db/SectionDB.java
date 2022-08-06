@@ -27,8 +27,11 @@ public class SectionDB extends CommonDB {
 	@Column(name = "section_code", nullable = false, unique = true)
 	private String section_code;
 
-	@Column(name = "title")
-	private String title;
+	@Column(name = "title_code")
+	private String titleCode;
+	
+	@Column(name = "help_code")
+	private String helpCode;
 
 	@OneToMany(mappedBy = "section")
 	Set<GroupSectionDB> groupSections;
