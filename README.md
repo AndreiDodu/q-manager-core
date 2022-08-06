@@ -24,6 +24,9 @@ At the graphic level, a questionnaire is a set of tabs. A group is represented b
 
 Each group, section or question has an order with respect to its parent. Therefore the groups can be ordered on the basis of the order property of the relationship table between the questionnaire and the group. The same logic applies to the section and to the questions.
 
+## Command line
+Q-Manager can be used from the command line. The commands are the followings:
+
 ## Running
 
 To make the executable jar file:
@@ -34,9 +37,7 @@ To run the application:
 	
 	java -jar q-manager.jar
 	
-## Command line
-Q-Manager can be used from the command line. The commands are the followings:
-#### Questionnaire
+#### Create a Questionnaire
 To create a questionnaire:
 
 	questionnaire create TITLE HELP LANGUAGE_CODE
@@ -63,7 +64,7 @@ To delete a questionnaire
 Where:
  - `QUESTIONNAIRE_CODE` is the questionnaire code found on DB	
  
-#### Group
+#### Create a Group
 To create a group:
 
 	group create TITLE HELP LANGUAGE_CODE
@@ -90,7 +91,7 @@ To delete a group
 Where:
  - `GROUP_CODE` is the group code found on DB	 
  
-#### Section
+#### Create a Section
 To create a section:
 
 	section create TITLE HELP LANGUAGE_CODE
