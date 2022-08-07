@@ -40,5 +40,4 @@ Each group, section or question has an order with respect to its parent. Therefo
 
 
 ## TODO
- - question insert feature
  - answer insert feature
