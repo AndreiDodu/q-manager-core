@@ -2,16 +2,18 @@ package com.andreidodu.qm.service.common;
 
 import java.util.List;
 
-public interface CategoryCommonService<DTOInsertType, DTOType> {
+import com.andreidodu.qm.dto.input.common.CategoryInsert;
 
-	public DTOType create(DTOInsertType insertDto);
+public interface CategoryCommonService<DTOType> {
 
-	public DTOInsertType update(DTOInsertType insertDto);
+	public DTOType create(CategoryInsert insertDto);
 
-	public List<DTOInsertType> getAll(String languageCode);
+	public CategoryInsert update(CategoryInsert insertDto);
+
+	public List<CategoryInsert> getAll(String languageCode);
 
 	public Boolean delete(String code);
 
-	DTOInsertType getByCode(String code, String languageCode);
+	CategoryInsert getByCode(String code, String languageCode);
 
 }

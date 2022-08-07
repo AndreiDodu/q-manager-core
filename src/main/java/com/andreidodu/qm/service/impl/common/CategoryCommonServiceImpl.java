@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.andreidodu.qm.db.CodesDB;
 import com.andreidodu.qm.dto.Translation;
 import com.andreidodu.qm.dto.input.TranslationInsert;
-import com.andreidodu.qm.dto.input.common.CategoryInputCommon;
+import com.andreidodu.qm.dto.input.common.CategoryInsert;
 import com.andreidodu.qm.mapper.common.CommonMapper;
 import com.andreidodu.qm.repository.DaoFactory;
 import com.andreidodu.qm.repository.common.CategoryCommonDao;
@@ -21,14 +21,12 @@ import com.andreidodu.qm.service.TranslationService;
 import com.andreidodu.qm.service.common.CategoryCommonService;
 
 @Transactional(propagation = Propagation.REQUIRED)
-public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, DTOInsertType extends CategoryInputCommon, MapperType extends CommonMapper<DBType, DTOType, DTOInsertType>>
-		implements CategoryCommonService<DTOInsertType, DTOType> {
+public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, MapperType extends CommonMapper<DBType, DTOType, CategoryInsert>> implements CategoryCommonService<DTOType> {
 
 	private static final String HELP_QUESTION_CODE = "HELP";
 	private static final String TITLE_QUESTION_CODE = "TITLE";
 
 	private final Class<DTOType> dtoClazz;
-	private final Class<DTOInsertType> dtoInsertClazz;
 
 	@Autowired
 	private DaoFactory daoFactory;
@@ -43,13 +41,12 @@ public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, 
 		return this.daoFactory.getCategoryDao(this.dtoClazz.getSimpleName());
 	}
 
-	public CategoryCommonServiceImpl(Class<DTOType> dtoClazz, Class<DTOInsertType> dtoInsertClazz) {
+	public CategoryCommonServiceImpl(Class<DTOType> dtoClazz) {
 		this.dtoClazz = dtoClazz;
-		this.dtoInsertClazz = dtoInsertClazz;
 	}
 
 	@Override
-	public DTOType create(DTOInsertType dtoInsert) {
+	public DTOType create(CategoryInsert dtoInsert) {
 		DBType db = this.mapper.toDB(dtoInsert);
 
 		if (dtoInsert.title() != null) {
@@ -74,7 +71,7 @@ public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, 
 	}
 
 	@Override
-	public DTOInsertType update(DTOInsertType questionnaireToUpdate) {
+	public CategoryInsert update(CategoryInsert questionnaireToUpdate) {
 		CategoryCommonDao<DBType, IDType> commonDao = getDao();
 		DBType db = commonDao.findByCode(questionnaireToUpdate.code());
 		if (db != null) {
@@ -107,15 +104,15 @@ public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, 
 	}
 
 	@Override
-	public List<DTOInsertType> getAll(String languageCode) {
+	public List<CategoryInsert> getAll(String languageCode) {
 		List<DBType> items = StreamSupport.stream(getDao().findAll().spliterator(), false).collect(Collectors.toList());
-		List<DTOInsertType> result = new ArrayList<>();
+		List<CategoryInsert> result = new ArrayList<>();
 		items.forEach(item -> {
 			Translation title = this.translationService.findByCommonCodeSubCodeLanguageCode(item.getCode(), TITLE_QUESTION_CODE, languageCode);
 			Translation help = this.translationService.findByCommonCodeSubCodeLanguageCode(item.getCode(), HELP_QUESTION_CODE, languageCode);
 
 			try {
-				DTOInsertType ins = dtoInsertClazz.getConstructor(String.class, String.class, String.class, String.class).newInstance(item.getCode(), title == null ? null : title.text(),
+				CategoryInsert ins = CategoryInsert.class.getConstructor(String.class, String.class, String.class, String.class).newInstance(item.getCode(), title == null ? null : title.text(),
 						help == null ? null : help.text(), languageCode);
 				result.add(ins);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
@@ -127,15 +124,15 @@ public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, 
 	}
 
 	@Override
-	public DTOInsertType getByCode(String code, String languageCode) {
+	public CategoryInsert getByCode(String code, String languageCode) {
 		DBType db = getDao().findByCode(code);
 		if (db != null) {
 			Translation title = this.translationService.findByCommonCodeSubCodeLanguageCode(db.getCode(), TITLE_QUESTION_CODE, languageCode);
 			Translation help = this.translationService.findByCommonCodeSubCodeLanguageCode(db.getCode(), HELP_QUESTION_CODE, languageCode);
 
 			try {
-				DTOInsertType ins = dtoInsertClazz.getConstructor(String.class, String.class, String.class, String.class).newInstance(db.getCode(), title == null ? null : title.text(), help == null ? null : help.text(),
-						languageCode);
+				CategoryInsert ins = CategoryInsert.class.getConstructor(String.class, String.class, String.class, String.class).newInstance(db.getCode(), title == null ? null : title.text(),
+						help == null ? null : help.text(), languageCode);
 				return ins;
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();

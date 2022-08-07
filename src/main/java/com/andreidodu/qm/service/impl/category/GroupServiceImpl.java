@@ -6,17 +6,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.andreidodu.qm.db.GroupDB;
 import com.andreidodu.qm.dto.Group;
-import com.andreidodu.qm.dto.input.GroupInsert;
 import com.andreidodu.qm.mapper.GroupMapper;
 import com.andreidodu.qm.service.category.GroupService;
 import com.andreidodu.qm.service.impl.common.CategoryCommonServiceImpl;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class GroupServiceImpl extends CategoryCommonServiceImpl<GroupDB, Long, Group, GroupInsert, GroupMapper> implements GroupService {
+public class GroupServiceImpl extends CategoryCommonServiceImpl<GroupDB, Long, Group, GroupMapper> implements GroupService {
 
 	public GroupServiceImpl() {
-		super(Group.class, GroupInsert.class);
+		super(Group.class);
 	}
 
 }
