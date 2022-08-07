@@ -1,4 +1,4 @@
-package com.andreidodu.qm.service.impl;
+package com.andreidodu.qm.service.impl.category;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -8,7 +8,7 @@ import com.andreidodu.qm.db.SectionDB;
 import com.andreidodu.qm.dto.Section;
 import com.andreidodu.qm.dto.input.SectionInsert;
 import com.andreidodu.qm.mapper.SectionMapper;
-import com.andreidodu.qm.service.SectionService;
+import com.andreidodu.qm.service.category.SectionService;
 import com.andreidodu.qm.service.impl.common.CategoryCommonServiceImpl;
 
 @Service

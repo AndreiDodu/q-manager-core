@@ -56,10 +56,13 @@ public class AssociationCommonServiceImpl<DTOType, DBType, IDType, MapperType ex
 	}
 
 	@Override
-	public AssociationInsert updateAssociation(String parentCode, String childCode, String parentCode2, String childCode2, Integer order) {
-		Optional<DBType> dbOpt = this.getDao().findByParentCodeAndChildCode(parentCode, childCode);
+	public AssociationInsert updateAssociation(AssociationInsert dtoIns) {
+		Optional<DBType> dbOpt = this.getDao().findByParentCodeAndChildCode(dtoIns.parentCode(), dtoIns.childCode());
 		if (dbOpt.isPresent()) {
-
+			DBType db = dbOpt.get();
+			this.mapper.update(db, dtoIns);
+			db = this.getDao().save(db);
+			return this.mapper.toDTO(db);
 		}
 		return null;
 	}

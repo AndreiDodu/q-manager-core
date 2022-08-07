@@ -1,4 +1,4 @@
-package com.andreidodu.qm.service;
+package com.andreidodu.qm.service.category;
 
 import com.andreidodu.qm.dto.Section;
 import com.andreidodu.qm.dto.input.SectionInsert;

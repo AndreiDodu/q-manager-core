@@ -1,4 +1,4 @@
-package com.andreidodu.qm.service;
+package com.andreidodu.qm.service.category;
 
 import com.andreidodu.qm.dto.Group;
 import com.andreidodu.qm.dto.input.GroupInsert;

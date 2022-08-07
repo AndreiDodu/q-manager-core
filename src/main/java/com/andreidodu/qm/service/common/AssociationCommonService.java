@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface AssociationCommonService<DTOInsertType, DTOType> {
 
-	DTOInsertType updateAssociation(String parentCode, String childCode, String parentCode2, String childCode2, Integer order);
+	DTOInsertType updateAssociation(DTOInsertType dtoIns);
 
 	DTOInsertType createAssociation(DTOInsertType associationInsert);
 
