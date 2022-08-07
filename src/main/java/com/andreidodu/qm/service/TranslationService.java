@@ -17,4 +17,8 @@ public interface TranslationService {
 
 	List<Translation> findByCommonCodeLanguageCode(String code, String languageCode);
 
+	void deleteByCommonCodeAndLanguageCode(String code, String languageCode);
+
+	void deleteByCommonCode(String questionCode);
+
 }

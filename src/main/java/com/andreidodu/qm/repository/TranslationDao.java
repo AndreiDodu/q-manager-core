@@ -16,4 +16,8 @@ public interface TranslationDao extends CrudRepository<TranslationDB, Long> {
 
 	List<TranslationDB> findByCommonCodeAndLanguageCode(String code, String languageCode);
 
+	void deleteByCommonCodeAndLanguageCode(String code, String languageCode);
+
+	void deleteByCommonCode(String code);
+
 }

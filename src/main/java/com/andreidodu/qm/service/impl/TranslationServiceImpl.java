@@ -59,4 +59,16 @@ public class TranslationServiceImpl implements TranslationService {
 		return this.mapper.toDTO(dbs);
 	}
 
+	@Override
+	public void deleteByCommonCodeAndLanguageCode(String code, String languageCode) {
+		this.dao.deleteByCommonCodeAndLanguageCode(code, languageCode);
+		
+	}
+
+	@Override
+	public void deleteByCommonCode(String code) {
+		this.dao.deleteByCommonCode(code);
+		
+	}
+
 }

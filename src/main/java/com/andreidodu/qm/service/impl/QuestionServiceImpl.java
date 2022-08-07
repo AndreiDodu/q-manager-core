@@ -24,6 +24,10 @@ import com.andreidodu.qm.service.TranslationService;
 @Transactional(propagation = Propagation.REQUIRED)
 public class QuestionServiceImpl implements QuestionService {
 
+	private static final String HELP_IDENTIFICATOR = "HELP";
+
+	private static final String QUESTION_IDENTIFICATOR = "QUESTION";
+
 	@Autowired
 	private TranslationService translationService;
 
@@ -43,14 +47,14 @@ public class QuestionServiceImpl implements QuestionService {
 		db.setCode(dtoInsert.code());
 
 		if (dtoInsert.text() != null) {
-			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), "QUESTION", dtoInsert.languageCode(), dtoInsert.text());
+			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), QUESTION_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.text());
 			this.translationService.create(translation);
 		}
 
 		if (dtoInsert.help() != null) {
-			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), "HELP", dtoInsert.languageCode(), dtoInsert.help());
+			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), HELP_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.help());
 			this.translationService.create(translation);
-			db.setHelpCode("HELP");
+			db.setHelpCode(HELP_IDENTIFICATOR);
 		}
 
 		db.setType(dtoInsert.type());
@@ -68,6 +72,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public Boolean delete(String questionCode) {
+		this.translationService.deleteByCommonCode(questionCode);
 		this.dao.deleteByCode(questionCode);
 		return true;
 	}
@@ -84,8 +89,8 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	public QuestionInsert getByCode(String code, String languageCode) {
 		QuestionDB db = this.dao.findByCode(code);
-		Translation questionText = this.translationService.findByCommonCodeSubCodeLanguageCode(code, "QUESTION", languageCode);
-		Translation helpText = this.translationService.findByCommonCodeSubCodeLanguageCode(code, "HELP", languageCode);
+		Translation questionText = this.translationService.findByCommonCodeSubCodeLanguageCode(code, QUESTION_IDENTIFICATOR, languageCode);
+		Translation helpText = this.translationService.findByCommonCodeSubCodeLanguageCode(code, HELP_IDENTIFICATOR, languageCode);
 		List<Pair> options = new ArrayList<>();
 		if ("MUL".equalsIgnoreCase(db.getType())) {
 			List<Translation> data = this.translationService.findByCommonCodeLanguageCode(code, languageCode);
@@ -95,9 +100,39 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public Question update(QuestionInsert groupInsert) {
-		// TODO Auto-generated method stub
-		return null;
+	public Question update(QuestionInsert dtoInsert) {
+		if (dtoInsert.languageCode() == null) {
+			return null;
+		}
+
+		QuestionDB db = new QuestionDB();
+		db.setCode(dtoInsert.code());
+
+		if (dtoInsert.text() != null) {
+			this.translationService.deleteByCommonCodeAndSubCode(dtoInsert.code(), QUESTION_IDENTIFICATOR);
+			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), QUESTION_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.text());
+			this.translationService.create(translation);
+		}
+
+		if (dtoInsert.help() != null) {
+			this.translationService.deleteByCommonCodeAndSubCode(dtoInsert.code(), HELP_IDENTIFICATOR);
+			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), HELP_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.help());
+			this.translationService.create(translation);
+			db.setHelpCode(HELP_IDENTIFICATOR);
+		}
+
+		db.setType(dtoInsert.type());
+
+		if ("MUL".equalsIgnoreCase(dtoInsert.type())) {
+			this.translationService.deleteByCommonCodeAndLanguageCode(dtoInsert.code(), dtoInsert.languageCode());
+			int[] i = new int[1];
+			dtoInsert.options().forEach(opt -> {
+				TranslationInsert translation = new TranslationInsert(dtoInsert.code(), String.valueOf(i[0]++), dtoInsert.languageCode(), opt.value());
+				this.translationService.create(translation);
+			});
+
+		}
+		return this.mapper.toDTO(this.dao.save(db));
 	}
 
 }
