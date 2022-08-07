@@ -8,4 +8,8 @@ import com.andreidodu.qm.db.QuestionDB;
 @Repository
 public interface QuestionDao extends CrudRepository<QuestionDB, Long> {
 
+	void deleteByCode(String questionCode);
+
+	QuestionDB findByCode(String code);
+
 }

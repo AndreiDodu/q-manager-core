@@ -28,9 +28,6 @@ public class QuestionDB extends CommonDB {
 	@Column(name = "help_code")
 	private String helpCode;
 
-	@Column(name = "common_code")
-	private String commonCode;
-
 	@Pattern(regexp = "NUM|TEXT|STR|DATE|MUL", flags = Pattern.Flag.CASE_INSENSITIVE)
 	@Column(name = "type")
 	private String type;

@@ -1,5 +1,7 @@
 package com.andreidodu.qm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -49,6 +51,12 @@ public class TranslationServiceImpl implements TranslationService {
 	@Override
 	public void deleteByCommonCodeAndSubCode(String commonCode, String subCode) {
 		this.dao.deleteByCommonCodeAndSubCode(commonCode, subCode);
+	}
+
+	@Override
+	public List<Translation> findByCommonCodeLanguageCode(String code, String languageCode) {
+		List<TranslationDB> dbs = this.dao.findByCommonCodeAndLanguageCode(code, languageCode);
+		return this.mapper.toDTO(dbs);
 	}
 
 }
