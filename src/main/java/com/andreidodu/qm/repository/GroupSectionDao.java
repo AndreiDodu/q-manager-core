@@ -1,11 +1,11 @@
 package com.andreidodu.qm.repository;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.andreidodu.qm.db.GroupSectionDB;
+import com.andreidodu.qm.repository.common.AssociationCommonDao;
 
 @Repository
-public interface GroupSectionDao extends CrudRepository<GroupSectionDB, Long> {
+public interface GroupSectionDao extends AssociationCommonDao<GroupSectionDB, Long> {
 
 }

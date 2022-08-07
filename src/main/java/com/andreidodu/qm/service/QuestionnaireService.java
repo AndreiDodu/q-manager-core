@@ -7,5 +7,4 @@ import com.andreidodu.qm.service.common.CategoryCommonService;
 public interface QuestionnaireService extends CategoryCommonService<QuestionnaireInsert, Questionnaire>{
 
 
-
 }

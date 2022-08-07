@@ -1,11 +1,11 @@
 package com.andreidodu.qm.repository;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.andreidodu.qm.db.QuestionnaireGroupDB;
+import com.andreidodu.qm.repository.common.AssociationCommonDao;
 
-@Repository
-public interface QuestionnaireGroupDao extends CrudRepository<QuestionnaireGroupDB, Long> {
+@Repository(value = "questionnairegroupDao")
+public interface QuestionnaireGroupDao extends AssociationCommonDao<QuestionnaireGroupDB, Long> {
 
 }

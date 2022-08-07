@@ -44,13 +44,13 @@
 				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_grp_questionnaire" />
 			</column>
 			
-			<column name="conf_questionnaire_id" type="BIGINT">
-				<constraints nullable="false" foreignKeyName="fk_conf_questionnaire_id" references="conf_questionnaire(conf_questionnaire_id)" />
+			<column name="questionnaire_code" type="VARCHAR(30)">
+				<constraints nullable="false" foreignKeyName="fk_conf_questionnaire_code" references="conf_questionnaire(questionnaire_code)" />
 			</column>
-			<column name="conf_group_id" type="BIGINT">
-				<constraints nullable="false" foreignKeyName="fk_questionnaire_conf_group_id" references="conf_group(conf_group_id)" />
+			<column name="group_code" type="VARCHAR(30)">
+				<constraints nullable="false" foreignKeyName="fk_questionnaire_conf_group_code" references="conf_group(group_code)" />
 			</column>
-			<column name="order" type="INT"/>
+			<column name="pos" type="INT"/>
 			
 			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
 			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
@@ -82,13 +82,13 @@
 				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_grp_section_id" />
 			</column>
 			
-			<column name="conf_group_id" type="BIGINT">
-				<constraints nullable="false" foreignKeyName="fk_group_conf_group_id" references="conf_group(conf_group_id)" />
+			<column name="group_code" type="VARCHAR(30)">
+				<constraints nullable="false" foreignKeyName="fk_group_conf_group_code" references="conf_group(group_code)" />
 			</column>			
-			<column name="conf_section_id" type="BIGINT">
-				<constraints nullable="false" foreignKeyName="fk_group_conf_section_id" references="conf_section(conf_section_id)" />
+			<column name="section_code" type="VARCHAR(30)">
+				<constraints nullable="false" foreignKeyName="fk_group_conf_section_code" references="conf_section(section_code)" />
 			</column>				
-			<column name="order" type="INT"/>
+			<column name="pos" type="INT"/>
 			
 			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
 			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
@@ -123,13 +123,13 @@
 				<constraints nullable="false" primaryKey="true"	primaryKeyName="pk_conf_section_question_id" />
 			</column>
 			
-			<column name="conf_section_id" type="BIGINT">
-				<constraints nullable="false" foreignKeyName="fk_section_conf_section_id" references="conf_section(conf_section_id)" />
+			<column name="section_code" type="VARCHAR(30)">
+				<constraints nullable="false" foreignKeyName="fk_section_conf_section_code" references="conf_section(section_code)" />
 			</column>						
-			<column name="conf_question_id" type="BIGINT">
-				<constraints nullable="false" foreignKeyName="fk_section_conf_question_id" references="conf_question(conf_question_id)" />
+			<column name="question_code" type="VARCHAR(30)">
+				<constraints nullable="false" foreignKeyName="fk_section_conf_question_code" references="conf_question(question_code)" />
 			</column>									
-			<column name="order" type="INT"/>
+			<column name="pos" type="INT"/>
 			
 			<column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />
 			<column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimeStamp}" />

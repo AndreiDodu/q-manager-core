@@ -40,7 +40,7 @@ public class CategoryCommonServiceImpl<DBType extends CodesDB, IDType, DTOType, 
 	private MapperType mapper;
 
 	private CategoryCommonDao<DBType, IDType> getDao() {
-		return this.daoFactory.getDao(this.dtoClazz.getSimpleName());
+		return this.daoFactory.getCategoryDao(this.dtoClazz.getSimpleName());
 	}
 
 	public CategoryCommonServiceImpl(Class<DTOType> dtoClazz, Class<DTOInsertType> dtoInsertClazz) {

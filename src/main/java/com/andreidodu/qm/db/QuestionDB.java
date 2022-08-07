@@ -1,13 +1,10 @@
 package com.andreidodu.qm.db;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
@@ -37,8 +34,5 @@ public class QuestionDB extends CommonDB {
 	@Pattern(regexp = "NUM|TEXT|STR|DATE|MUL", flags = Pattern.Flag.CASE_INSENSITIVE)
 	@Column(name = "type")
 	private String type;
-
-	@OneToMany(mappedBy = "question")
-	Set<SectionQuestionDB> sectionQuestions;
 
 }
