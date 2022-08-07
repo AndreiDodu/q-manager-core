@@ -1,4 +1,4 @@
 package com.andreidodu.qm.dto;
 
-public record Group(Long id, String groupCode, String titleCode, String holCode) {
+public record Group(Long id, String code, String titleCode, String holCode) {
 }
