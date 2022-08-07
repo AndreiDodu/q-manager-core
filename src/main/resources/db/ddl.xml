@@ -105,7 +105,6 @@
 				<constraints unique="true" uniqueConstraintName="unique_question_code" />
 			</column>			
 			<column name="help_code" type="VARCHAR(30)"/>
-			<column name="common_code" type="VARCHAR(30)"/>
 			<!-- TXT, STR, NUM, DATE -->
 			<column name="type" type="VARCHAR(4)">
 				<constraints nullable="false"/>

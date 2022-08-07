@@ -105,34 +105,38 @@ public class QuestionServiceImpl implements QuestionService {
 			return null;
 		}
 
-		QuestionDB db = new QuestionDB();
-		db.setCode(dtoInsert.code());
+		QuestionDB db = this.dao.findByCode(dtoInsert.code());
 
-		if (dtoInsert.text() != null) {
-			this.translationService.deleteByCommonCodeAndSubCode(dtoInsert.code(), QUESTION_IDENTIFICATOR);
-			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), QUESTION_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.text());
-			this.translationService.create(translation);
-		}
+		if (db != null) {
+			db.setCode(dtoInsert.code());
 
-		if (dtoInsert.help() != null) {
-			this.translationService.deleteByCommonCodeAndSubCode(dtoInsert.code(), HELP_IDENTIFICATOR);
-			TranslationInsert translation = new TranslationInsert(dtoInsert.code(), HELP_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.help());
-			this.translationService.create(translation);
-			db.setHelpCode(HELP_IDENTIFICATOR);
-		}
-
-		db.setType(dtoInsert.type());
-
-		if ("MUL".equalsIgnoreCase(dtoInsert.type())) {
-			this.translationService.deleteByCommonCodeAndLanguageCode(dtoInsert.code(), dtoInsert.languageCode());
-			int[] i = new int[1];
-			dtoInsert.options().forEach(opt -> {
-				TranslationInsert translation = new TranslationInsert(dtoInsert.code(), String.valueOf(i[0]++), dtoInsert.languageCode(), opt.value());
+			if (dtoInsert.text() != null) {
+				this.translationService.deleteByCommonCodeAndSubCode(dtoInsert.code(), QUESTION_IDENTIFICATOR);
+				TranslationInsert translation = new TranslationInsert(dtoInsert.code(), QUESTION_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.text());
 				this.translationService.create(translation);
-			});
+			}
 
+			if (dtoInsert.help() != null) {
+				this.translationService.deleteByCommonCodeAndSubCode(dtoInsert.code(), HELP_IDENTIFICATOR);
+				TranslationInsert translation = new TranslationInsert(dtoInsert.code(), HELP_IDENTIFICATOR, dtoInsert.languageCode(), dtoInsert.help());
+				this.translationService.create(translation);
+				db.setHelpCode(HELP_IDENTIFICATOR);
+			}
+
+			db.setType(dtoInsert.type());
+
+			if ("MUL".equalsIgnoreCase(dtoInsert.type())) {
+				this.translationService.deleteByCommonCodeAndLanguageCode(dtoInsert.code(), dtoInsert.languageCode());
+				int[] i = new int[1];
+				dtoInsert.options().forEach(opt -> {
+					TranslationInsert translation = new TranslationInsert(dtoInsert.code(), String.valueOf(i[0]++), dtoInsert.languageCode(), opt.value());
+					this.translationService.create(translation);
+				});
+
+			}
+			return this.mapper.toDTO(this.dao.save(db));
 		}
-		return this.mapper.toDTO(this.dao.save(db));
+		return null;
 	}
 
 }
