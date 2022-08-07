@@ -37,3 +37,8 @@ Each group, section or question has an order with respect to its parent. Therefo
 ## Here is the DB schema:
 
 <img alt="Q-Manager Schema" src="./questionnaire-manager-schema.png" />
+
+
+## TODO
+ - question insert feature
+ - answer insert feature
