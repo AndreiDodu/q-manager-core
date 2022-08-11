@@ -1,5 +1,5 @@
-# Q-Manager Core (Java Library)
-A questionnaire manager java library.
+# Q-Manager Core
+A questionnaire manager java application.
 
 An example of use of this library can be found in [q-manager-console](https://github.com/AndreiDodu/q-manager-console).
 
